@@ -1,0 +1,48 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: # 默认无密码
+    database: 0
+    timeout: 10000ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/oasystem?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: YOUR_DATABASE_PASSWORD # 请替换为你的数据库密码
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# 文件上传存储目录（相对于项目根目录）
+file:
+  upload-dir: ./uploads
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL日志
+    map-underscore-to-camel-case: true
+
+jwt:
+  # JWT秘钥
+  secret: YOUR_JWT_SECRET_KEY_PLEASE_CHANGE_THIS_BEFORE_DEPLOYMENT
+  # JWT过期时间
+  expiration: 86400
+  token-header: Authorization
+  token-prefix: "Bearer "
